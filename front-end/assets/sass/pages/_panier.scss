@@ -1,0 +1,121 @@
+.button{
+    width:2%;
+    cursor: pointer;
+    color: rgb(218, 16, 16);
+    &:hover{
+        transform: scale(1.2);
+    }
+
+    &:active{
+        transform: scale(0.8);
+    }
+}
+
+
+.block_alerte{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+    height: auto;
+    border:1px solid rgb(6, 177, 245);
+    background-color:rgb(240, 245, 247);
+
+    & p{
+        font-size: 1.2em;
+        color: rgb(17, 160, 165);
+        margin-top: 2%;
+    }
+
+    &_element{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 3%;
+    }
+}
+
+
+.option{
+    border:1px solid rgb(6, 177, 245);
+    background-color:rgb(222, 237, 243);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+
+    &_1{
+        color: red;
+    }
+
+    &:hover{
+        transform: scale(1.2);
+    }
+
+    &:active{
+        transform: scale(0.8);
+    }
+}
+
+.hidden{
+    display: none;
+}
+
+.input{
+
+    & input{
+        width:50px;
+        text-align: center;
+    }
+}
+
+
+.block_valide{
+    font-size: 1.5em;
+}
+
+
+.valid{
+    color:green;
+    font-size: 1em;
+    margin-bottom: 2%;
+}
+
+
+.noValid{
+    color: red;
+    font-size: 1em;
+    margin-bottom: 2%;
+}
+
+
+.back-home{
+    padding:10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.btn-last-command {
+    padding:10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 5px; 
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.request{
+    text-align: center;
+}
+
+.get-command{
+    border:1px solid rgb(32, 152, 173);
+    display:flex;
+    justify-content:space-around;
+    width:70%;
+    margin:auto;
+    background:rgb(151, 228, 240);
+    margin-top:5px;
+    flex-wrap: wrap;
+}

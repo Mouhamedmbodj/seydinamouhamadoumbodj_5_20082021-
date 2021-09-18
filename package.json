@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./front-end/assets/sass/style.scss:./front-end/assets/css/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mouhamedmbodj/seydinamouhamadoumbodj_5_20082021.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mouhamedmbodj/seydinamouhamadoumbodj_5_20082021/issues"
+  },
+  "homepage": "https://github.com/Mouhamedmbodj/seydinamouhamadoumbodj_5_20082021#readme",
+  "description": "",
+  "dependencies": {
+    "sass": "^1.39.0"
+  }
+}
