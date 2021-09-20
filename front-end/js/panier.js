@@ -12,10 +12,8 @@
    deleteProduct()
 
    //Mettre a jour la quantite du produit dans le localStorage
-    if(localStorage.getItem('quantity')!=null){
-      updateQuantity();
-    }
-
+   updateQuantity();
+   
    //Verification des champs d'input sur le formulaire
    //avec des regexps
    validForm(); 
@@ -32,9 +30,9 @@ function getBasket() {
         add.innerHTML +=`<tr>
         <th scope="row">${item.name}</th>
         <td>${item.lense}</td>
-        <td class='input'><input type="number" class='quantity' min="1" id="${item.lense}" name="quantity" value="${item.quantity}"></td>
-        <td class='item-price' id='${item.lense}'>${item.quantity * item.price}$</td>
-        <td class="button mx-auto"><span id='${item.lense}' class=" delete"><i class="fas fa-trash"></i></span></td>
+        <td class='input'><input type="number" class='quantity' min="1" id="${item.lense + item.name}" name="quantity" value="${item.quantity}"></td>
+        <td class='item-price' id='${item.lense + item.name}'>${item.quantity * item.price}$</td>
+        <td class="button mx-auto"><span id='${item.lense + item.name}' class=" delete"><i class="fas fa-trash"></i></span></td>
         </tr>`   
     });   
 
@@ -80,28 +78,31 @@ function verifyInputQuantity(){
 //mettre a jour la valeur quantite dans l'objet produit dans le localStorage 
 //quand on le change sur le champ quantity du panier
 function updateQuantity() {
-    
-    let articles=document.querySelectorAll('input');
+    //recuperer les produits du localStorage
+    //dans une variable
+    let quantityInit=localStorage.getItem('productAdded');
+    quantityInit=JSON.parse(quantityInit)
+
+    let articles=document.querySelectorAll('.quantity');
+    articles=Array.from(articles);
+
     for(article of articles){
         article.addEventListener('change' ,function() { 
-           //recuperer l'id de l'input qui correspond au lentille
-           //du produit selectionner
-           let productId=this.id;
-
-           //recuperer les produits du localStorage
-           //dans une variable
-           let quantityInit=localStorage.getItem('productAdded');
-           quantityInit=JSON.parse(quantityInit)
-
-           //changer la quantite du produit qui correspond a productId
-           quantityInit[productId].quantity=this.value;
-
-           //mettre a jour productAdded
-           localStorage.setItem('productAdded',JSON.stringify(quantityInit))
-
-           //relancer la page
-           window.location.reload();
+            //recuperer l'id de l'input qui correspond au lentille
+            //du produit selectionner
+            let productId=this.id;
+  
+            let quantity=parseInt(this.value)
            
+            //changer la quantite du produit qui correspond a productId
+            quantityInit[productId].quantity=quantity
+         
+            //mettre a jour productAdded
+            localStorage.setItem('productAdded',JSON.stringify(quantityInit))
+
+            //relancer la page
+            window.location.reload();
+              
         })  
     
     }  
@@ -179,7 +180,7 @@ function validForm() {
     //creation de la fonction pour valider la valeur du champ
     let validFirstName=function(inputFirstName) {
          //creation de la regexp
-         let firstNameRegexp=new RegExp('^[a-zA-Z\-]+$');
+         let firstNameRegexp=new RegExp(`^[a-zA-Z]+[a-zA-Z]+[a-zA-Z0-9]+[\ \s\:\,\''\-\é\è\î]*$`);
 
         //recuperation de la balise small
         let small=inputFirstName.nextElementSibling;
@@ -264,7 +265,7 @@ function validForm() {
 
     let validCity=function(inputCity) {
        //creation de la regexp
-       let cityRegexp=new RegExp(`^[a-zA-Z0-9\ s\:\,\''\-\é\è\î]*$`)
+       let cityRegexp=new RegExp(`^[a-zA-Z0-9]+[a-zA-Z0-9]+[a-zA-Z0-9]+[\ \s\:\,\''\-\é\è\î]*$`)
     
        //recuperation de la balise small
        let small=inputCity.nextElementSibling;
@@ -291,7 +292,7 @@ function validForm() {
     })
 
     let validAdresse=function(inputAdresse) {
-        let adresseRegexp=new RegExp(`^[a-zA-Z0-9\ s\:\,\''\-\é\è\î]*$`)
+        let adresseRegexp=new RegExp(`^[a-zA-Z0-9]+[a-zA-Z0-9]+[a-zA-Z0-9]+[\ \s\:\,\''\-\é\è\î]*$`)
         //recuperation de la balise small
         let small=inputAdresse.nextElementSibling;
 
@@ -382,6 +383,9 @@ function validForm() {
 
 }
 
+
+/*********************************processus reuperation de la derniere commande **************************/
+
 //recuperer l'order id sur la reponse
 //de la commande precedente
 function getorderId() {
@@ -437,21 +441,20 @@ function getLastCommand() {
     //ecouter le bouton recuperer
     getCommand.addEventListener('click' , function() {
         if(productAdded!=null){
-            Object.values(products).map(item=>{
-                productAdded={
-                    ...productAdded, 
-                    [(item.lense)]:item,
-                }
-            })
+            
+            productAdded={
+                ...productAdded, 
+                ...products, 
+            }
+            
             localStorage.setItem('productAdded', JSON.stringify(productAdded))
         
         }else{
-            Object.values(products).map(item=>{
-                productAdded={
-                    [(item.lense)]:item
-                }
+            
+            productAdded={
+                ...products,
+            }
          
-            })
             localStorage.setItem('productAdded', JSON.stringify(productAdded))
         }
 

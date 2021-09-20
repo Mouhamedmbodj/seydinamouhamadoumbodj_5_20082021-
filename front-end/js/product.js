@@ -173,7 +173,8 @@ function productQuantity(product){
     //si une lentille est deja dans le localStorage 
     //additionner zero dans le compteur  
     if(Local != null){
-        if(Local[product.lense]!=undefined){
+        let nameProduct=product.lense + product.name;
+        if(Local[nameProduct]!=undefined){
 
             localStorage.setItem('quantity' , cardSelected + 0);
             document.querySelector('.basket_number').innerHTML=cardSelected
@@ -190,7 +191,7 @@ function productQuantity(product){
               
             //changer la quantite du produit qui correspond à la valeur sur l'input quantite
             //dans le local
-            quantityUpdate[product.lense].quantity=quantity.value;
+            quantityUpdate[nameProduct].quantity=quantity.value;
 
             //mettre a jour le produit dans le LocalStorage
             localStorage.setItem('productAdded',JSON.stringify(quantityUpdate)) 
@@ -206,20 +207,6 @@ function productExist(product){
     if(productNumbers){
         document.querySelector('.basket_number').textContent=productNumbers;
     }
-     
-    //mettre á jour la quantite si le produit existe dans le panier
-    let quantityInlocal=localStorage.getItem('productAdded')
-    quantityInlocal=JSON.parse(quantityInlocal)
-    
-    let lenses= product.lenses
-    for(lense of lenses){
-        if(quantityInlocal){
-            if(lense in quantityInlocal){
-             document.querySelector('#quantity').value=quantityInlocal[lense].quantity;
-            }
-        }
-        
-    }
 }
 
  
@@ -229,11 +216,13 @@ function saveItems(product) {
     getProductAdded = JSON.parse(getProductAdded);
        //ajouter le produit avec ce qui etait dans le localStorage  
        //si il y'avait deja un produit
+       let nameProduct=product.lense + product.name;
+
         if(getProductAdded != null){
-            if(getProductAdded[product.lense]==undefined){
+            if(getProductAdded[nameProduct]==undefined){
                 getProductAdded={
                  ...getProductAdded,
-                 [product.lense]:product, 
+                 [nameProduct]:product, 
                 }/******* */
             //alerte
             alert('Produit ajouter')
@@ -243,7 +232,7 @@ function saveItems(product) {
          //sinon ajouter seulement le produit     
         }else{
             getProductAdded={
-                [product.lense]:product 
+                [nameProduct]:product 
             } 
             //alerte
             alert('Produit ajouter')   

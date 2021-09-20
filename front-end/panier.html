@@ -19,14 +19,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand h2 col-12 text-center col-md" href="accueil.html">Orinoco</a>
-               <a class="basket h6 navbar-brand col-12 text-center col-md" aria-current="page" href="accueil.html">Acceuil</a>
-              </div>
+              <a class="basket h6 navbar-brand col-12 text-center col-md" aria-current="page" href="accueil.html">Acceuil</a>  
             </div>
           </nav>
     </header>
 
     <div class="LastCommand-block container-sm text-center col-9 mb-3">
-      <label for="validationDefault03" class="form-label">Entrez votre identifiant pour récupérer</br> votre dernière commande</label>
+      <label for="validationDefault03" class="form-label">Entrez votre identifiant pour récupérer<br/> votre dernière commande</label>
       <input type="text" class="form-control col-md-5 m-auto" id="lastCommand" name="adresse" >
     </div>
     
@@ -50,19 +49,20 @@
           <th scope="col">Name</th>
           <th scope="col">Lense</th>
           <th scope="col">Quantity</th>
-          <th scope="col" colspan="2">Price</th>
+          <th scope="col" >Price</th>
         </tr>
       </thead>
       <tbody>
                  
       </tbody>
       <tr>
-          <td colspan="5" class="text-center">TOTAL : <span class="total-price"></span></td>
+          <td colspan="4" class="text-center">TOTAL : <span class="total-price"></span></td>
       </tr> 
     </table>
 
     <section class="container-sm mt-5 ">
-        <form class="row container-sm col-md-8 m-auto g-3  d-flex flex-column " method="POST" action="">
+        <h1 class="text-center formulaire col-8 mb-5 bg-info text-white">veuillez remplir le formulaire suivant</h1>
+        <form class="row container-sm col-md-8 m-auto g-3  d-flex flex-column " method="POST">
             <div class="">
               <label for="validationDefault01" class="form-label">Prenom</label>
               <input type="text" class="form-control" id="validationDefault01" value="Mark" name="firstName" required>
@@ -75,7 +75,7 @@
             </div>
             <div class="">
               <label for="validationDefaultUsername" class="form-label">Email</label>
-              <input type="email" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" name="email" required>
+              <input type="email" class="form-control" id="validationDefaultUsername"  name="email" required>
               <small></small>
             </div>
             <div class="">
@@ -85,17 +85,12 @@
             </div>
             <div class="">
                 <label for="validationDefault03" class="form-label">Adresse</label>
-                <input type="text" class="form-control" id="validationDefault03" name="adresse" required>
+                <input type="text" class="form-control" id="validationadresse"  name="adresse" required>
                 <small></small>
             </div>
             
-              <div class="mt-3">
-                 <label for="iput-number">DATE</label>
-                 <input type="date" name="date" id="input-number" required>
-                 <small></small>
-              </div>
             <div class="m-auto">
-              <button class="btn btn-primary mt-2" type="submit">Commander</button>
+              <button class="btn btn-primary mt-3" type="submit">Commander</button>
             </div>
         </form>
     </section>
