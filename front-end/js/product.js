@@ -22,6 +22,9 @@
     //ajouter une valeur quantite 
     //et une lentille dans l'object product 
     updateProduct(product);
+
+    //renitialiser la quantite si on change de lentille
+    renitialiseInput()
 })()
 
 //recuperer l'id du produit dans l'url
@@ -29,7 +32,6 @@
 function getProductId() {
     return new URL(location.href).searchParams.get('id');
 }
-
 
 //recuperer dans l'api le produit
 //qui contient l'id specifier dans l'url
@@ -42,7 +44,6 @@ function getProduct(productId) {
         alert(error)
     });
 }
-
 
 //affichage du produits recuperer dans l'api
 function displayProduct(product){
@@ -79,7 +80,6 @@ function displayProduct(product){
         document.querySelector('.bloc-card-product').appendChild(cloneTemplate);
 }
 
-
 //verifier la quantite ajouter
 //si c'est un nombre entier positif
 //superieur a zero
@@ -104,7 +104,6 @@ function updateInput(){
     }
 }
 
-
 //ajouter les valeurs 
 //quantite et lentille dans l'objet product
 function updateProduct(product) {
@@ -115,8 +114,7 @@ function updateProduct(product) {
 
      quantityAdd.addEventListener('change' , function () {
          quantity=this.value;
-         product.quantity=quantity;
-
+         product.quantity=quantity + parseInt(product.quantity)
      })
 
      //ajouter la lentille selectionner dans l'objet product
@@ -179,24 +177,24 @@ function productQuantity(product){
             localStorage.setItem('quantity' , cardSelected + 0);
             document.querySelector('.basket_number').innerHTML=cardSelected
 
-            //recuperer les produits du localStorage
-            //dans une variable
-            let quantityUpdate=localStorage.getItem('productAdded');
-            quantityUpdate=JSON.parse(quantityUpdate)
-
+            //recuperation de la valeur sur l'input
             let quantity=document.querySelector('#quantity')
-              
-            quantity.value=parseInt(quantity.value) + 1;
-              
-              
+            quantity.value++
+                            
             //changer la quantite du produit qui correspond à la valeur sur l'input quantite
             //dans le local
-            quantityUpdate[nameProduct].quantity=quantity.value;
+            let locaQuantity=parseInt(Local[nameProduct].quantity);
+            let inputQuantity=parseInt(quantity.value)
+            let total=locaQuantity + inputQuantity
+            console.log(total)
+            Local[nameProduct].quantity=total -1
+            alert('Vous avez ajouter' + ` ${Local[nameProduct].quantity} ` + ' fois ce produit dans le panier!')
 
             //mettre a jour le produit dans le LocalStorage
-            localStorage.setItem('productAdded',JSON.stringify(quantityUpdate)) 
+            localStorage.setItem('productAdded',JSON.stringify(Local)) 
         }
-    } 
+    }
+
 }
 
 
@@ -210,6 +208,17 @@ function productExist(product){
 }
 
  
+//remettre la quantite a zéro lorsqu'on change de lentille
+function renitialiseInput(){
+    let lentille=document.querySelector('#Lentilles');
+    lentille.addEventListener('change' , function(){
+        let quantity=document.querySelector('#quantity');
+        quantity.value=1;
+        alert('vous changez de lentille')
+    })
+}
+
+
 //ajouter le produit dans le local storage
 function saveItems(product) {
     let getProductAdded=localStorage.getItem('productAdded');

@@ -208,7 +208,7 @@ function validForm() {
 
     let validSecondName=function(inputSecondName) {
         //creation de la regexp
-        let secondNameRegexp=new RegExp('^[A-Z][a-zA-Z]+$')
+        let secondNameRegexp=new RegExp(`^[a-zA-Z]+[a-zA-Z]+[a-zA-Z0-9]+[\ \s\:\,\''\-\é\è\î]*$`)
     
         //recuperation de la balise small
         let small=inputSecondName.nextElementSibling;
