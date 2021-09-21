@@ -9,6 +9,9 @@
     //afficher le produit dans la page
     displayProduct(product);
 
+    //renitialiser la quantite si on change de lentille
+    renitialiseInput()
+
     //compter le nombre de fois que le produit est ajouter au panier
     //ajouter le produit dans le localStorage 
     addCard(product);
@@ -23,8 +26,7 @@
     //et une lentille dans l'object product 
     updateProduct(product);
 
-    //renitialiser la quantite si on change de lentille
-    renitialiseInput()
+   
 })()
 
 //recuperer l'id du produit dans l'url
@@ -111,11 +113,6 @@ function updateProduct(product) {
      let quantityAdd=document.querySelector('#quantity');
      let quantity=quantityAdd.value;
      product.quantity=quantity;
-
-     quantityAdd.addEventListener('change' , function () {
-         quantity=this.value;
-         product.quantity=quantity + parseInt(product.quantity)
-     })
 
      //ajouter la lentille selectionner dans l'objet product
      let Lense=document.querySelector('#Lentilles');
@@ -213,9 +210,10 @@ function renitialiseInput(){
     let lentille=document.querySelector('#Lentilles');
     lentille.addEventListener('change' , function(){
         let quantity=document.querySelector('#quantity');
-        quantity.value=1;
+        quantity.value=1
+        console.log(quantity.value)
         alert('vous changez de lentille')
-    })
+    })   
 }
 
 
