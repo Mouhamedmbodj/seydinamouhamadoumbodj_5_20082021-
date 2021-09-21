@@ -112,11 +112,6 @@ function updateProduct(product) {
      let quantity=quantityAdd.value;
      product.quantity=quantity;
 
-     quantityAdd.addEventListener('change' , function () {
-         quantity=this.value;
-         product.quantity=quantity + parseInt(product.quantity)
-     })
-
      //ajouter la lentille selectionner dans l'objet product
      let Lense=document.querySelector('#Lentilles');
      let lenseValue=Lense.value;
